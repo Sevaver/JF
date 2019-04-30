@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>IMICUS Freight</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" />
+
+    <!-- Custom styles for this template -->
+    <link href="/static/css/freight.css" rel="stylesheet">
+
+  </head>
+
+  <body id="page-top">
+
+    <!-- Navigation
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="/"><i class="fas fa-shipping-fast"></i> TEST Freight</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+             <li class="nav-item">
+              <a class="nav-link" href="/calculator/">Calculator</a>
+            </li>
+
+            
+              
+          </ul>
+        </div>
+      </div>
+    </nav>
+ -->
+    
+<header class="bg-primary text-white">
+    <div class="container text-center">
+    <h1>Reward Calculator</h1>
+    <p class="lead">IMICUS Logistics, safe, fast, and priced to move</p>
+    </div>
+</header>
+
+
+<section id="about">
+    <div class="container">
+        <div class="alert alert-danger">
+          <strong>Danger!</strong> Do not include containers of any kind in your contract!
+        </div>
+
+        <div class="row" style="margin:10px;">
+        <div class="col-sm-2">Pickup:</div>
+        <div class="col-sm-6">
+
+        <select name="pickup" id="pickup" class="form-control" onchange="collateral()">
+
+            <option value="">Pickup System</option>
+		
+            <option value="1000">Amarr</option>
+			
+			<option value="1000">Rayl</option>
+
+			<option value="1000">O3Z5-G Keepstar</option>
+
+			<option value="1000">DY-P7Q Keepstar</option>
+			
+			<option value="1000">M-ZJWJ Keepstar</option>
+
+			<option value="1000">U-QVWD Keepstar</option>
+
+			<option value="1000">L-5JCJ Keepstar</option>
+			
+			<option value="1500">Q-U96U Fortizar</option>
+					
+			<option value="1500">Jita IV - Moon 4 - Caldari Navy Assembly Plant</option>			
+
+        </select>
+        </div>
+        </div>
+		
+		        <div class="row" style="margin:10px;">
+        <div class="col-sm-2">Dropoff:</div>
+        <div class="col-sm-6">
+
+        <select name="dropoff" id="dropoff" class="form-control" onchange="collateral()">
+
+            <option value="">Dropoff System</option>
+		
+            <option value="1000">Amarr</option>
+			
+			<option value="1000">Rayl</option>
+
+			<option value="1000">O3Z5-G Keepstar</option>
+
+			<option value="1000">DY-P7Q Keepstar</option>
+			
+			<option value="1000">M-ZJWJ Keepstar</option>
+
+			<option value="1000">U-QVWD Keepstar</option>
+
+			<option value="1000">L-5JCJ Keepstar</option>
+			
+			<option value="1500">Q-U96U Fortizar</option>
+			
+			<option value="1500">Jita IV - Moon 4 - Caldari Navy Assembly Plant</option>		
+			
+        </select>
+        </div>
+        </div>
+
+        <div class="row" style="margin:10px;">
+        <div class="col-sm-2">Contract Size:</div>
+        <div class="col-sm-6">
+            <div class="input-group add-on">
+                <input type="text" id="m3" class="form-control" value="0" />
+                <div class="input-group-append">
+                    <div class="input-group-text">m³</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">(320000 max | 60000 recommended)</div>
+        </div>
+
+        <div class="row" style="margin:10px;">
+        <div class="col-sm-2">Collateral:</div>
+        <div class="col-sm-6">
+            <div class="input-group add-on">
+                <input type="text" id="collat" class="form-control" value="0" />
+                <div class="input-group-append">
+                    <div class="input-group-text">ISK</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">(Less than 5.0 billion recommended)</div>
+        </div>
+        <dl>
+            <dt>Reward</dt>
+            <dd id="reward">0 ISK</dd>
+            <dt>Recommendations</dt>
+            <dd id="recomendation"></dd>
+        </dl>
+  <p>Shamelessly Stolen from <a href=https://freight.pleaseignore.com/calculator/>TEST Please Ignore</a></p>
+
+		</div>
+	
+
+	
+</section>
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+
+    
+<script>
+const clean_regex = /^\d+(?:\.\d+)?\s*$/i;
+const thousand_regex = /^\d+(?:\.\d+)?\s*k$/i;
+const million_regex = /^\d+(?:\.\d+)?\s*m(?:illion)?$/i;
+const billion_regex = /^\d+(?:\.\d+)?\s*b(?:illion)?$/i;
+
+function collateral() {
+    var collateralRate = 0.01;
+    var maxSize = 320000;
+    var recomendedCollateral = 5000000000;
+    var recomendedSize = 60000;
+    var minPrice = 10000000;
+	var jitaMin = 240000000;
+	
+	var pickrate = parseInt($("#pickup").val());
+	var droprate = parseInt($("#dropoff").val());
+	var m3Rate = Math.max(pickrate, droprate);
+	
+    var size;
+    var size_text = $("#m3").val();
+
+    if (size_text.match(billion_regex) != null) {
+        size = 1000000000 * parseFloat(size_text);
+    } else if (size_text.match(million_regex) != null) {
+        size = 1000000 * parseFloat(size_text);
+    } else if (size_text.match(thousand_regex) != null) {
+        size = 1000 * parseFloat(size_text);
+    } else if (size_text.match(clean_regex) != null) {
+        size = parseFloat(size_text);
+    } else {
+        size = NaN;
+    }
+
+    var collateral;
+    var collateral_text = $("#collat").val();
+
+    if (collateral_text.match(billion_regex) != null) {
+        collateral = 1000000000 * parseFloat(collateral_text);
+    } else if (collateral_text.match(million_regex) != null) {
+        collateral = 1000000 * parseFloat(collateral_text);
+    } else if (collateral_text.match(thousand_regex) != null) {
+        collateral = 1000 * parseFloat(collateral_text);
+    } else if (collateral_text.match(clean_regex) != null) {
+        collateral = parseFloat(collateral_text);
+    } else {
+        collateral = NaN;
+    }
+
+<!--    if (m3Rate >= 2000) { -->
+<!--	var reward = Math.max(jitaMin + (collateral * collateralRate), (1500 * size) + (collateral * collateralRate * 2)); -->
+<!--	} else { -->
+    var reward = Math.max(minPrice + (collateral * collateralRate), (m3Rate * size) + (collateral * collateralRate));
+<!-- }	-->
+
+	
+    $("#reward").text(reward.toFixed(2).toString() + " (" + (reward.toFixed(2)/1000000).toFixed(2) + " Million ISK)");
+
+	if (reward > minPrice) {
+        $("#recomendation").text("None, go for it!");
+    } else {
+        $("#recomendation").text("Come on now, ain't nobody got time to move your shit for less than 10 million ISK");
+    }
+
+	if (size > maxSize) {
+        $("#recomendation").text("The fuck are you trying to move? A titan? Split your contract nerd");
+    } else if (size > recomendedSize || collateral > recomendedCollateral){
+        $("#recomendation").text("Consider splitting your contract into smaller chunks for faster service.");
+    }
+
+    if (isNaN(collateral) || isNaN(size) || isNaN(reward)){
+        $("#reward").text("");
+        $("#recomendation").text("Please try filling in all the fields correctly, it's the least you can do after all");
+    }
+}
+
+$("#route").on("input", null, null, collateral);
+$("#m3").on("input", null, null, collateral);
+$("#collat").on("input", null, null, collateral);
+
+collateral();
+</script>
+
+
+  </body>
+  
+</html>
