@@ -20,27 +20,6 @@
   </head>
 
   <body id="page-top">
-
-    <!-- Navigation
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
-      <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="/"><i class="fas fa-shipping-fast"></i> TEST Freight</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-             <li class="nav-item">
-              <a class="nav-link" href="/calculator/">Calculator</a>
-            </li>
-
-            
-              
-          </ul>
-        </div>
-      </div>
-    </nav>
- -->
     
 <header class="bg-primary text-white">
     <div class="container text-center">
@@ -49,7 +28,7 @@
     </div>
 </header>
 
-
+		
 <section id="about">
     <div class="container">
         <div class="alert alert-danger">
@@ -60,6 +39,8 @@
         <div class="col-sm-2">Pickup:</div>
         <div class="col-sm-6">
 
+		<!-- This Section Contains Shipping From Locations -->
+		
         <select name="pickup" id="pickup" class="form-control" onchange="collateral()">
 
             <option value="">Pickup System</option>
@@ -82,6 +63,11 @@
 					
 			<option value="1500">Jita IV - Moon 4 - Caldari Navy Assembly Plant</option>			
 
+			<!--	Copy this to add additional Options
+					$$$$ is the isk value per m3
+			<option value="$$$$"> Location Name </option>
+			-->
+			
         </select>
         </div>
         </div>
@@ -90,6 +76,8 @@
         <div class="col-sm-2">Dropoff:</div>
         <div class="col-sm-6">
 
+				<!-- This Section Contains Shipping To Locations -->
+		
         <select name="dropoff" id="dropoff" class="form-control" onchange="collateral()">
 
             <option value="">Dropoff System</option>
@@ -111,6 +99,11 @@
 			<option value="1500">Q-U96U Fortizar</option>
 			
 			<option value="1500">Jita IV - Moon 4 - Caldari Navy Assembly Plant</option>		
+
+			<!--	Copy this to add additional Options
+					$$$$ is the isk value per m3
+			<option value="$$$$"> Location Name </option>
+			-->
 			
         </select>
         </div>
@@ -147,7 +140,7 @@
             <dt>Recommendations</dt>
             <dd id="recomendation"></dd>
         </dl>
-  <p>Shamelessly Stolen from <a href=https://freight.pleaseignore.com/calculator/>TEST Please Ignore</a></p>
+  <p>Inspired by the Freight Service by <a href=https://freight.pleaseignore.com/calculator/>TEST Please Ignore</a></p>
 
 		</div>
 	
@@ -163,7 +156,8 @@
     <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
 
-    
+    <!-- This Secion contains all the mathy bits -->
+	
 <script>
 const clean_regex = /^\d+(?:\.\d+)?\s*$/i;
 const thousand_regex = /^\d+(?:\.\d+)?\s*k$/i;
@@ -212,11 +206,8 @@ function collateral() {
         collateral = NaN;
     }
 
-<!--    if (m3Rate >= 2000) { -->
-<!--	var reward = Math.max(jitaMin + (collateral * collateralRate), (1500 * size) + (collateral * collateralRate * 2)); -->
-<!--	} else { -->
     var reward = Math.max(minPrice + (collateral * collateralRate), (m3Rate * size) + (collateral * collateralRate));
-<!-- }	-->
+
 
 	
     $("#reward").text(reward.toFixed(2).toString() + " (" + (reward.toFixed(2)/1000000).toFixed(2) + " Million ISK)");
